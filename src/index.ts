@@ -1,12 +1,16 @@
 import { config } from 'dotenv';
 config({ path: `.env.local` });
 
-import express, { Express } from 'express';
+import express from 'express';
 
-const app: Express = express();
+import router from './router';
+
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api', router);
 
 app
   .listen(process.env.SERVER_PORT, () =>
